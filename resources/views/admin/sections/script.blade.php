@@ -29,6 +29,7 @@
 <script src="{{asset('plugins/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('plugins/admin/dist/js/adminlte.js')}}"></script>
+
 <!-- AdminLTE for demo purposes -->
 <!--<script src="{{asset('plugins/admin/dist/js/demo.js')}}"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
