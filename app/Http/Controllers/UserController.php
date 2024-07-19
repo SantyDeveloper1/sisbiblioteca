@@ -19,27 +19,39 @@ class UserController extends Controller
         return view('admin.users.users', compact('users')); // Asegúrate de que la vista esté correcta
     }
     
-    public function actionUpdatePassword(Request $request, $id)
+    public function actionUpdatePassword(Request $request, SessionManager $sessionManager, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'txtPassword' => 'required',
-            'txtPassword1' => 'required|min:8',
-            'txtPassword2' => 'required|same:txtPassword1',
-        ]);
+        if ($request->isMethod('post')) {
+            $listMessage = [];
+            $validator = Validator::make($request->all(), 
+            [
+                'txtPassword' => 'required',
+                'txtPassword1' => 'required|min:8',
+                'txtPassword2' => 'required|same:txtPassword1',
+            ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()], 422);
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+                foreach ($errors as $value) {
+                    $listMessage[] = $value;
+                }
+                return response(implode("\n", $listMessage), 422);  // Devuelve los mensajes de error
+            }
+
+            $user = Auth::user();
+            if (!Hash::check($request->input('txtPassword'), $user->password)) {
+                $listMessage[] = 'La contraseña actual es incorrecta.';
+                return response(implode("\n", $listMessage), 422);  // Devuelve el mensaje de error
+            }
+
+            $user->password = Hash::make($request->input('txtPassword1'));
+            $user->save();
+            $sessionManager->flash('listMessage', ['Actualización realizada correctamente.']);
+            $sessionManager->flash('typeMessage', 'success');
+           // return response('La contraseña se actualizó correctamente.');  // Devuelve mensaje de éxito
         }
 
-        $user = Auth::user();
-        if (!Hash::check($request->input('txtPassword'), $user->password)) {
-            return response()->json(['errors' => ['La contraseña actual es incorrecta.']], 422);
-        }
-
-        $user->password = Hash::make($request->input('txtPassword1'));
-        $user->save();
-
-        return response()->json(['message' => 'La contraseña se actualizó correctamente.']);
+        return response('Método no permitido.', 405);
     }
 
 }

@@ -49,15 +49,15 @@ function sendFrmPassword() {
 
     isValid = $('#form-password-update').data('formValidation').isValid();
 
-    if (!isValid) {
-        new PNotify({
-            title: 'No se pudo proceder',
-            text: 'Complete y corrija toda la información del formulario.',
-            type: 'error',
-            styling: 'bootstrap3'
-        });
-        return;
-    }
+    if(!isValid) {
+		new PNotify(
+		{
+			title : 'No se pudo proceder',
+			text : 'Complete y corrija toda la infirmación del formulario.',
+			type : 'error'
+		});
+		return;
+	}
 
     // Enviar el formulario mediante AJAX
     $.ajax({
@@ -67,25 +67,21 @@ function sendFrmPassword() {
         success: function(response) {
             new PNotify({
                 title: 'Éxito',
-                text: 'La contraseña se actualizó correctamente.',
+                text: 'La Contraseña se actualizó correctamente.',
                 type: 'success'
             });
             $('#modal-password').modal('hide');
+            //window.location.reload();
         },
+        
+    
         error: function(xhr, status, error) {
-            var response = xhr.responseJSON;
-            var errorMessage = 'Error al actualizar la contraseña.';
-
-            if (response.errors) {
-                errorMessage = response.errors.join('<br>');
-            }
-
             new PNotify({
                 title: 'Error',
-                text: errorMessage,
-                type: 'error',
-                styling: 'bootstrap3'
+                text: 'Error al actualizar la contraseña.',
+                type: 'error'
             });
-        }
+            window.location.reload();
+            }
     });
 }
