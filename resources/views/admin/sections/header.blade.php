@@ -67,121 +67,49 @@
       <!-- END Right Header Navigation -->
     </ul>
   </nav>
-  
-  <style>
-  .custom-modal-width {
-    max-width: 45%; /* Puedes ajustar este valor según tus necesidades */
-  }
-  </style>
-<!-- MODAL PARA CAMBIAR CONTRASEÑA -->
-<div class="modal fade" id="modal-perfil" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-  <div class="modal-dialog custom-modal-width" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="editForm">
-          <div class="form-group row">
-            <div class="col-md-12 text-center">
-              <input type="file" name="foto"  class="form-control" accept="image/jpg, image/png, image/gif, image/jpeg" >
-              <label for="txtFirstName">Foto de Perfil</label>
-            </div> 
-            <div class="col-md-4">
-              <label for="txtFirstName">Nombres</label>
-              <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurName">Apellido Paterno</label>
-              <input type="txtSurName" name="txtSurName" class="form-control" placeholder="Ingrese el apellido Paterno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurNameM">Apellido Materno</label>
-              <input type="txtSurNameM" name="txtSurNameM" class="form-control" placeholder="Ingrese el apellido Materno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurDni">Documento</label>
-              <input type="txtSurDni" name="txtSurDni" class="form-control" placeholder="Ingrese el apellido Materno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtCorreo">Correo Electronico</label>
-              <input type="email" name="txtPassword" class="form-control" placeholder="Ingrese Nueva Contraseña">
-            </div>
-            <div class="col-md-4">
-            <label for="txtCorreo">Genero del usuario</label>
-              <div class="form-check form-check-inline">
-                <input type="radio" name="sex" value="M" class="form-check-input" > Masculino
-                <input type="radio" name="sex" value="F" class="form-check-input" > Feminino
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="updateUser($('#modal-perfil').data('idUser'));">Guardar cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal fade" id="modal-password">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+  
+
+  <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
+  <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
+<div id="modal-password" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Large Modal</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                <h2 class="modal-title text-center text-danger">Cambiar Contraseña</h2>
             </div>
             <div class="modal-body">
-        <form id="editForm">
-          <div class="form-group row">
-            <div class="col-md-12 text-center">
-              <input type="file" name="foto"  class="form-control" accept="image/jpg, image/png, image/gif, image/jpeg" >
-              <label for="txtFirstName">Foto de Perfil</label>
-            </div> 
-            <div class="col-md-4">
-              <label for="txtFirstName">Nombres</label>
-              <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurName">Apellido Paterno</label>
-              <input type="txtSurName" name="txtSurName" class="form-control" placeholder="Ingrese el apellido Paterno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurNameM">Apellido Materno</label>
-              <input type="txtSurNameM" name="txtSurNameM" class="form-control" placeholder="Ingrese el apellido Materno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtSurDni">Documento</label>
-              <input type="txtSurDni" name="txtSurDni" class="form-control" placeholder="Ingrese el apellido Materno">
-            </div>
-            <div class="col-md-4">
-              <label for="txtCorreo">Correo Electronico</label>
-              <input type="email" name="txtPassword" class="form-control" placeholder="Ingrese Nueva Contraseña">
-            </div>
-            <div class="col-md-4">
-            <label for="txtCorreo">Genero del usuario</label>
-              <div class="form-check form-check-inline">
-                <input type="radio" name="sex" value="M" class="form-check-input" > Masculino
-                <input type="radio" name="sex" value="F" class="form-check-input" > Feminino
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
+                <form id="form-password-update" class="form-horizontal form-bordered" action="{{ route('user.update', ['id' => Auth::id()]) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Contraseña Actual</label>
+                        <div class="col-md-12">
+                            <input type="password" id="txtPassword" name="txtPassword" class="form-control" placeholder="Ingrese Contraseña Actual">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Contraseña Nueva</label>
+                        <div class="col-md-12">
+                            <input type="password" id="txtPassword1" name="txtPassword1" class="form-control" placeholder="Ingrese Contraseña Nueva">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-6 control-label">Repite la Contraseña</label>
+                        <div class="col-md-12">
+                            <input type="password" id="txtPassword2" name="txtPassword2" class="form-control" placeholder="Repite Contraseña Nueva">
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="sendFrmPassword();">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>                                
         </div>
-        <!-- /.modal-dialog -->
-      </div>
-
-
+    </div>
+</div>
+@section('js')
+<script src="{{ asset('viewresources/user/update.js?=18072024') }}"></script>
+@endsection

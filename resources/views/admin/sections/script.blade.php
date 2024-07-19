@@ -27,9 +27,27 @@
 <script src="{{asset('plugins/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('plugins/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('plugins/admin/dist/js/adminlte.js')}}"></script>
 
+<script src="{{asset('plugins/admin/dist/js/adminlte.js')}}"></script>
+<script src="{{ asset('plugins/validations/formvalidation/formValidation.min.js') }}"></script>
+<script src="{{ asset('plugins/validations/formvalidation/bootstrap.validation.min.js') }}"></script>
+<script src="{{ asset('plugins/validations/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('plugins/validations/pnotify/pnotify.custom.min.js') }}"></script>
+<script>
+  var _urlBase = '{{url('/')}}';
+
+    @if(Session::has('listMessage'))
+      @foreach(Session::get('listMessage') as $value)
+        new PNotify(
+        {
+          title : '{{Session::get('typeMessage') == 'error' ? 'No se pudo proceder!' : 'Correcto!'}}',
+          text : '{{$value}}',
+          type : '{{Session::get('typeMessage')}}'
+        });
+      @endforeach
+    @endif
+</script>
+@yield('js')
 <!-- AdminLTE for demo purposes -->
 <!--<script src="{{asset('plugins/admin/dist/js/demo.js')}}"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

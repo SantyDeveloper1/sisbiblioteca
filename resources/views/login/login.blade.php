@@ -41,5 +41,5 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('viewresources/login/login.js?=14072024') }}"></script>
+<script src="{{ asset('viewresources/login/login.js?=16072024') }}"></script>
 @endsection

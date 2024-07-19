@@ -1,5 +1,4 @@
 @include('admin/sections.t_inicio')
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -120,6 +119,6 @@
 </div>
 <!-- ./wrapper -->
 @include('admin/sections.script')
-
+@yield('js')
 </body>
 </html>

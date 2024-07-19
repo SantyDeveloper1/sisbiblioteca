@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::match(['get', 'post'], '/home', [HomeController::class, 'actionHome']);
     Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::match(['get', 'post'], 'user/insert', [UserController::class, 'actionInsert'])->name('user.insert');
+    Route::match(['post'], 'user/update/{id}', [UserController::class, 'actionUpdatePassword'])->name('user.update');
+    //Route::post('/user/update/{id}', [UserController::class, 'actionUpdatePassword'])->name('user.update');
 });
 
 //Route::match(['get', 'post'], 'user/insert', [UserController::class, 'actionInsert'])->name('user.insert');

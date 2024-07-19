@@ -74,7 +74,7 @@ class LoginController extends Controller {
             }
         }
 
-        return view('admin/login.login'); // Asegúrate de que la vista esté correcta
+        return view('login.login'); // Asegúrate de que la vista esté correcta
     }
     
     public function logout()
@@ -83,5 +83,4 @@ class LoginController extends Controller {
 
         return redirect()->route('login');
     }
-
 }
