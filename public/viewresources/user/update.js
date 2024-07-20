@@ -49,39 +49,64 @@ function sendFrmPassword() {
 
     isValid = $('#form-password-update').data('formValidation').isValid();
 
-    if(!isValid) {
-		new PNotify(
-		{
-			title : 'No se pudo proceder',
-			text : 'Complete y corrija toda la infirmación del formulario.',
-			type : 'error'
-		});
-		return;
-	}
+    if (!isValid) {
+        new PNotify({
+            title: 'No se pudo proceder',
+            text: 'Complete y corrija toda la información del formulario.',
+            type: 'error'
+        });
+        return;
+    }
+
+   
+        // Enviar el formulario mediante AJAX
+        $.ajax({
+            url: $('#form-password-update').attr('action'),
+            method: 'POST',
+            data: $('#form-password-update').serialize(),
+            success: function(response) {
+                new PNotify({
+                    title: 'Éxito',
+                    text: response.message,
+                    type: 'success'
+                });
+                $('#modal-password').modal('hide');
+                setTimeout(function() {
+                    window.location.href = '/sisbiblioteca/public/login'; // Ruta específica
+                    window.location.reload();
+                }, 5000); // Espera 2 segundos antes de redirigir
+            },
+            error: function(xhr, status, error) {
+                new PNotify({
+                    title: 'Error',
+                    text: xhr.responseJSON.message,
+                    type: 'error'
+                });
+            }
+        });
 
     // Enviar el formulario mediante AJAX
-    $.ajax({
+    /*$.ajax({
         url: $('#form-password-update').attr('action'),
         method: 'POST',
         data: $('#form-password-update').serialize(),
         success: function(response) {
             new PNotify({
                 title: 'Éxito',
-                text: 'La Contraseña se actualizó correctamente.',
+                text: response.message,
                 type: 'success'
             });
             $('#modal-password').modal('hide');
-            //window.location.reload();
+            window.location.reload();
         },
-        
-    
         error: function(xhr, status, error) {
             new PNotify({
                 title: 'Error',
-                text: 'Error al actualizar la contraseña.',
+                text: xhr.responseJSON.message,
                 type: 'error'
             });
-            window.location.reload();
-            }
-    });
+        }
+    });*/
 }
+  
+

@@ -12,11 +12,8 @@ class UserController extends Controller
 {
     public function actionInsert(Request $request, SessionManager $sessionManager)
     {
-        // Obtener todos los usuarios de la base de datos
         $users = User::all();
-
-        // Pasar los usuarios a la vista
-        return view('admin.users.users', compact('users')); // Asegúrate de que la vista esté correcta
+        return view('admin.users.users', compact('users'));
     }
     
     public function actionUpdatePassword(Request $request, SessionManager $sessionManager, $id)
@@ -35,23 +32,30 @@ class UserController extends Controller
                 foreach ($errors as $value) {
                     $listMessage[] = $value;
                 }
-                return response(implode("\n", $listMessage), 422);  // Devuelve los mensajes de error
+                return response()->json(['message' => implode("\n", $listMessage)], 422);
             }
 
             $user = Auth::user();
             if (!Hash::check($request->input('txtPassword'), $user->password)) {
                 $listMessage[] = 'La contraseña actual es incorrecta.';
-                return response(implode("\n", $listMessage), 422);  // Devuelve el mensaje de error
+                return response()->json(['message' => implode("\n", $listMessage)], 422);
+                //$sessionManager->flash('typeMessage', 'error');
+                //return response()->json(['message' => 'La contraseña Actual es incorrecto.']);
             }
 
             $user->password = Hash::make($request->input('txtPassword1'));
             $user->save();
-            $sessionManager->flash('listMessage', ['Actualización realizada correctamente.']);
+
+             // Cerrar la sesión del usuario
+             Auth::logout();
+             
             $sessionManager->flash('typeMessage', 'success');
-           // return response('La contraseña se actualizó correctamente.');  // Devuelve mensaje de éxito
+            return response()->json(['message' => 'La contraseña se actualizó correctamente.']);
+            
         }
 
-        return response('Método no permitido.', 405);
+        return response()->json(['message' => 'Método no permitido.'], 405);
     }
-
 }
+
+

@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class LoginController extends Controller {
@@ -55,11 +54,7 @@ class LoginController extends Controller {
                 ];
 
                 if (Auth::attempt($credentials)) {
-                    // Credenciales válidas
-                    $sessionManager->flash('listMessage', ['Inicio de sesión exitoso.']);
-                    $sessionManager->flash('typeMessage', 'success');
-
-                    // Redirigir al usuario a su dashboard o página principal
+                    // Credenciales válidas, redirigir siempre a /home
                     return redirect()->intended('/home');
                 } else {
                     // Contraseña incorrecta o usuario no encontrado
@@ -76,11 +71,16 @@ class LoginController extends Controller {
 
         return view('login.login'); // Asegúrate de que la vista esté correcta
     }
-    
+
     public function logout()
     {
         Auth::logout();
-
         return redirect()->route('login');
+    }
+
+    // Sobrescribimos el método authenticated para redirigir siempre a /home
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect('/home');
     }
 }

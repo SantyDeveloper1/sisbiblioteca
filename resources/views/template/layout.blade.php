@@ -110,15 +110,14 @@
         <script src="{{ asset('plugins/validations/pnotify/pnotify.custom.min.js') }}"></script>
         
         <script>
-            var _urlBase = '{{url('/')}}';
+            var _urlBase = '{{ url('/') }}';
 
             @if(Session::has('listMessage'))
-                @foreach(Session::get('listMessage') as $value)
-                    new PNotify(
-                    {
-                        title : '{{Session::get('typeMessage') == 'error' ? 'No se pudo proceder!' : 'Correcto!'}}',
-                        text : '{{$value}}',
-                        type : '{{Session::get('typeMessage')}}'
+                @foreach(Session::pull('listMessage') as $value)
+                    new PNotify({
+                        title: '{{ Session::get('typeMessage') == 'error' ? 'No se pudo proceder!' : 'Correcto!' }}',
+                        text: '{{ $value }}',
+                        type: '{{ Session::get('typeMessage') }}'
                     });
                 @endforeach
             @endif

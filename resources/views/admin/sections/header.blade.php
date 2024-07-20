@@ -69,47 +69,45 @@
   </nav>
 
   
-
   <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
-  <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
-<div id="modal-password" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title text-center text-danger">Cambiar Contraseña</h2>
-            </div>
-            <div class="modal-body">
-                <form id="form-password-update" class="form-horizontal form-bordered" action="{{ route('user.update', ['id' => Auth::id()]) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Contraseña Actual</label>
-                        <div class="col-md-12">
-                            <input type="password" id="txtPassword" name="txtPassword" class="form-control" placeholder="Ingrese Contraseña Actual">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Contraseña Nueva</label>
-                        <div class="col-md-12">
-                            <input type="password" id="txtPassword1" name="txtPassword1" class="form-control" placeholder="Ingrese Contraseña Nueva">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Repite la Contraseña</label>
-                        <div class="col-md-12">
-                            <input type="password" id="txtPassword2" name="txtPassword2" class="form-control" placeholder="Repite Contraseña Nueva">
-                        </div>
-                    </div>
-                    <div class="form-group form-actions">
-                        <div class="col-md-12 text-center">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" onclick="sendFrmPassword();">Guardar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>                                
-        </div>
-    </div>
-</div>
+  <div id="modal-password" class="modal fade" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title text-center text-danger">Cambiar Contraseña</h2>
+              </div>
+              <div class="modal-body">
+                  <form id="form-password-update" class="form-horizontal form-bordered" action="{{ route('user.update', ['id' => Auth::id()]) }}" method="POST">
+                      @csrf
+                      <div class="form-group">
+                          <label class="col-md-4 control-label">Contraseña Actual</label>
+                          <div class="col-md-12">
+                              <input type="password" id="txtPassword" name="txtPassword" class="form-control" placeholder="Ingrese Contraseña Actual">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label">Contraseña Nueva</label>
+                          <div class="col-md-12">
+                              <input type="password" id="txtPassword1" name="txtPassword1" class="form-control" placeholder="Ingrese Contraseña Nueva">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-6 control-label">Repite la Contraseña</label>
+                          <div class="col-md-12">
+                              <input type="password" id="txtPassword2" name="txtPassword2" class="form-control" placeholder="Repite Contraseña Nueva">
+                          </div>
+                      </div>
+                      <div class="form-group form-actions">
+                          <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-primary" onclick="sendFrmPassword();">Guardar</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>                                
+          </div>
+      </div>
+  </div>
 @section('js')
-<script src="{{ asset('viewresources/user/update.js?=18072024') }}"></script>
+<script src="{{ asset('viewresources/user/update.js?=20072024') }}"></script>
 @endsection
