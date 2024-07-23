@@ -46,6 +46,11 @@
         });
       @endforeach
     @endif
+
+    @if(session('redirect'))
+            var loginUrl = '{{ url('/login') }}';
+            window.location.replace(loginUrl);
+    @endif
 </script>
 @yield('js')
 <!-- AdminLTE for demo purposes -->

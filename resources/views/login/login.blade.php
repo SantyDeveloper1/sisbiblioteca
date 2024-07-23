@@ -1,7 +1,7 @@
 @extends('template.layout')
 @section('titleGeneral', 'Registrar Persona...')
 @section('sectionGeneral')
-<form id="frmLoginSesion" action="{{ url('/login') }}" method="post" class="form-horizontal form-bordered form-control-borderless">
+<form id="frmLoginSesion" action="{{ url('login') }}" method="POST" class="form-horizontal form-bordered form-control-borderless">
     @csrf
     <div class="form-group">
         <div class="col-xs-12">
@@ -41,5 +41,5 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('viewresources/login/login.js?=20072024') }}"></script>
+<script src="{{ asset('viewresources/login/login.js?=22072024') }}"></script>
 @endsection

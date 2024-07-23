@@ -68,7 +68,63 @@
     </ul>
   </nav>
 
-  
+  <!-- MODAL PARA ACTUALIZAR PERFIL -->
+  <div class="modal fade" id="modal-perfil">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title">Actualizar Perfil</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="row form-group">
+                      <div class="col-md-12 text-center">
+                        <input type="file" name="foto"  class="form-control" accept="image/jpg, image/png, image/gif, image/jpeg" >
+                        <label class="control-label">Foto de perfil</label>
+                      </div>  
+                      <div class="col-md-4 text-center">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Ingrese Nombre">
+                        <label class="control-label">Nombre</label>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        <input type="text" id="txtApellidoPaterno" name="txtApellidoPaterno" class="form-control" placeholder="Ingrese Apellido Paterno">
+                        <label class="control-label">Apellido Paterno</label>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
+                        <label class="control-label">Apellido Materno</label>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese DNI">
+                        <label class="control-label">Documento de Identidad</label>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese Email">
+                        <label class="control-label">Correo Electronico</label>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        <div class="form-check form-check-inline">
+                          <input type="radio" name="sex" value="M" class="form-check-input" > Masculino
+                          <input type="radio" name="sex" value="F" class="form-check-input" > Feminino
+                        </div>
+                        <label class="control-label">Genero   User</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+          </div>
+          <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
   <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
   <div id="modal-password" class="modal fade" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
@@ -108,6 +164,7 @@
           </div>
       </div>
   </div>
+
 @section('js')
-<script src="{{ asset('viewresources/user/update.js?=20072024') }}"></script>
+<script src="{{ asset('viewresources/user/update.js?=22072024') }}"></script>
 @endsection

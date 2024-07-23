@@ -2,13 +2,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Session\SessionManager;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller {
-    public function actionHome(Request $request, SessionManager $sessionManager)
+    public function actionHome(Request $request)
     {
+        // Obtén el ID del usuario autenticado
+        $authenticatedUserId = Auth::id();
         
-        return view('admin/home.home'); // Asegúrate de que la vista esté correcta
+        // Filtra los usuarios excluyendo al usuario autenticado
+        $users = User::where('id', '!=', $authenticatedUserId)->get();
+        
+        // Pasa los usuarios filtrados a la vista
+        return view('admin/home.home', compact('users'));
     }
 }

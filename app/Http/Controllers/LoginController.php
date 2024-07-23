@@ -9,11 +9,6 @@ use App\Models\User;
 
 class LoginController extends Controller {
 
-    public function actionLogin()
-    {
-        return view('login.login');
-    }
-
     public function actionLoginSesion(Request $request, SessionManager $sessionManager)
     {
         if ($request->isMethod('post')) {
@@ -54,8 +49,8 @@ class LoginController extends Controller {
                 ];
 
                 if (Auth::attempt($credentials)) {
-                    // Credenciales válidas, redirigir siempre a /home
-                    return redirect()->intended('/home');
+                    // Credenciales válidas, pasar indicador a la vista para redirección
+                    return view('login.login')->with('redirect', true);
                 } else {
                     // Contraseña incorrecta o usuario no encontrado
                     $listMessage[] = 'Correo electrónico o contraseña incorrectos.';
@@ -65,7 +60,7 @@ class LoginController extends Controller {
             if (!empty($listMessage)) {
                 $sessionManager->flash('listMessage', $listMessage);
                 $sessionManager->flash('typeMessage', 'error');
-                return redirect('/login')->withInput(); // Mantener datos del formulario en caso de error
+                //return redirect('/login'); // Mantener datos del formulario en caso de error
             }
         }
 
@@ -75,12 +70,7 @@ class LoginController extends Controller {
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
-    }
-
-    // Sobrescribimos el método authenticated para redirigir siempre a /home
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect('/home');
+        return redirect('/login')->with('redirect', true);
     }
 }
+
