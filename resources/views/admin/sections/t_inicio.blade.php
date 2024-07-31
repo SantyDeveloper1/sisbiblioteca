@@ -30,5 +30,5 @@
   <link rel="stylesheet" href="{{asset('plugins/admin/plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/validations/pnotify/pnotify.custom.min.css') }}">
 
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

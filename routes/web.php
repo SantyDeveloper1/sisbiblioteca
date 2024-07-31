@@ -13,6 +13,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::match(['get', 'post'], '/login', [LoginController::class, 'actionLoginSesion'])->name('login');
 });
 
+Route::get('/user/get/{id}', [UserController::class, 'getUser'])->name('user.get');
 // Rutas protegidas por middleware de autenticación
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'actionHome'])->name('home');
@@ -20,8 +21,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::match(['get', 'post'], 'user/insert', [UserController::class, 'actionInsert'])->name('user.insert');
     Route::post('user/update/{id}', [UserController::class, 'actionUpdatePassword'])->name('user.update');
+    //Route::get('/user/get/{id}', [UserController::class, 'getUser'])->name('user.get');
+    //Route::match(['get', 'post'], 'user/updateUser/{id}', [UserController::class, 'actionUpdateUser'])->name('user.updateUser');
+    Route::post('user/updateUser/{id}', [UserController::class, 'actionUpdateUser'])->name('user.updateUser');
 });
 
+// Rutas protegidas por middleware de autenticación
+/*Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [HomeController::class, 'actionHome'])->name('home');
+    Route::match(['get', 'post'], '/home', [HomeController::class, 'actionHome']);
+    Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::match(['get', 'post'], 'user/insert', [UserController::class, 'actionInsert'])->name('user.insert');
+    Route::post('user/update/{id}', [UserController::class, 'actionUpdatePassword'])->name('user.update');
+    Route::match(['get', 'post'], 'user/updateUser/{id}', [UserController::class, 'actionUpdateUser']);
+});*/
 
 //Route::match(['get', 'post'], 'user/insert', [UserController::class, 'actionInsert'])->name('user.insert');
 /*Route::group(['middleware' => 'auth'], function () {

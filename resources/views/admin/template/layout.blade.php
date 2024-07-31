@@ -6,7 +6,9 @@
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{asset('plugins/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
-
+  <script>
+    var id = '{{ Auth::user()->id }}';
+</script>
   <!-- Navbar -->
   @include('admin/sections.header')
   <!-- /.navbar -->
@@ -119,6 +121,7 @@
 </div>
 <!-- ./wrapper -->
 @include('admin/sections.script')
+
 @yield('js')
 </body>
 </html>

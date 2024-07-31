@@ -56,6 +56,68 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Método no permitido.'], 405);
     }
+
+    public function getUser($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado.'], 404);
+        }
+
+        return response()->json($user);
+    }
+
+    public function actionUpdateUser(Request $request, $id)
+    {
+        try {
+            // Validación de datos
+            $validator = Validator::make(
+                [
+                    'txtFirstName' => trim($request->input('txtFirstName')),
+                    'txtSurName' => trim($request->input('txtSurName')),
+                    'txtSurNameM' => trim($request->input('txtSurNameM')),
+                    'txtDNIName' => trim($request->input('txtDNIName')),
+                    'txtEmail' => trim($request->input('txtEmail')),
+                ],
+                [
+                    'txtFirstName' => 'required|string|max:255',
+                    'txtSurName' => 'required|string|max:255',
+                    'txtSurNameM' => 'required|string|max:255',
+                    'txtDNIName' => ['required', 'regex:/^\d{8}$/'], // Verifica que sean 8 números
+                    'txtEmail' => 'required|email|max:255',
+                ],
+                [
+                    'txtFirstName.required' => 'El campo "Nombre" es requerido.',
+                    'txtSurName.required' => 'El campo "Apellido Paterno" es requerido.',
+                    'txtSurNameM.required' => 'El campo "Apellido Materno" es requerido.',
+                    'txtDNIName.required' => 'El campo "DNI" es requerido.',
+                    'txtDNIName.regex' => 'El DNI debe tener exactamente 8 caracteres numéricos.',
+                    'txtEmail.required' => 'El campo "Correo Electrónico" es requerido.',
+                    'txtEmail.email' => 'El campo "Correo Electrónico" debe ser una dirección de correo válida.',
+                    'txtEmail.max' => 'El campo "Correo Electrónico" no puede tener más de 255 caracteres.',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['success' => false, 'errors' => $validator->errors()->all()], 422);
+            }
+
+            // Encontrar el usuario y actualizarlo
+            $user = User::findOrFail($id);
+            $user->name = $request->input('txtFirstName');
+            $user->surName = $request->input('txtSurName');
+            $user->surNameM = $request->input('txtSurNameM');
+            $user->Surdni = $request->input('txtDNIName');
+            $user->email = $request->input('txtEmail');
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Perfil actualizado correctamente.']);
+
+        } catch (\Exception $e) {
+            \Log::error('Error al actualizar el perfil del usuario: '.$e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Se produjo un error al actualizar el perfil.'], 500);
+        }
+    }
+
 }
-
-

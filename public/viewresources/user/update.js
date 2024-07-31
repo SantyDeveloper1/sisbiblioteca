@@ -74,7 +74,7 @@ function sendFrmPassword() {
                 setTimeout(function() {
                     window.location.href = '/sisbiblioteca/public/login'; // Ruta específica
                     window.location.reload();
-                }, 5000); // Espera 2 segundos antes de redirigir
+                }, 5000); // Espera 5 segundos antes de redirigir
             },
             error: function(xhr, status, error) {
                 new PNotify({

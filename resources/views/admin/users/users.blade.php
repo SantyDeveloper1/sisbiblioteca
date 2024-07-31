@@ -91,11 +91,11 @@
                                                 <td class="text-center">{{ $user->created_at }}</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-xs">
-                                                        <a href="#" title="View Details" class="btn btn-info {{ $user->stateUser == 0 ? 'disabled' : '' }}">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
                                                         <a href="#" title="Edit User" class="btn btn-success {{ $user->stateUser == 0 ? 'disabled' : '' }}">
                                                             <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" title="View Details" class="btn btn-info {{ $user->stateUser == 0 ? 'disabled' : '' }}">
+                                                            <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a href="#" title="Delete User" class="btn btn-danger {{ $user->stateUser == 0 ? 'disabled' : '' }}">
                                                             <i class="fa fa-trash"></i>

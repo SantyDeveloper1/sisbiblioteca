@@ -67,63 +67,58 @@
       <!-- END Right Header Navigation -->
     </ul>
   </nav>
-
+  <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
   <!-- MODAL PARA ACTUALIZAR PERFIL -->
   <div class="modal fade" id="modal-perfil">
-      <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h4 class="modal-title">Actualizar Perfil</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form id="form-user-update" class="form-horizontal form-bordered" action="{{ route('user.updateUser', ['id' => Auth::id()]) }}" method="POST">
+                  @csrf
+                  <!-- Asegúrate de que los nombres de los campos coincidan con los que esperas en el controlador -->
+                  <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
                   <div class="row form-group">
-                      <div class="col-md-12 text-center">
-                        <input type="file" name="foto"  class="form-control" accept="image/jpg, image/png, image/gif, image/jpeg" >
-                        <label class="control-label">Foto de perfil</label>
-                      </div>  
                       <div class="col-md-4 text-center">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Ingrese Nombre">
-                        <label class="control-label">Nombre</label>
+                          <input type="text" id="txtFirstName" name="txtFirstName" class="form-control" placeholder="Ingrese Nombre">
+                          <label class="control-label">Nombre</label>
                       </div>
                       <div class="col-md-4 text-center">
-                        <input type="text" id="txtApellidoPaterno" name="txtApellidoPaterno" class="form-control" placeholder="Ingrese Apellido Paterno">
-                        <label class="control-label">Apellido Paterno</label>
+                          <input type="text" id="txtSurName" name="txtSurName" class="form-control" placeholder="Ingrese Apellido Paterno">
+                          <label class="control-label">Apellido Paterno</label>
                       </div>
                       <div class="col-md-4 text-center">
-                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
-                        <label class="control-label">Apellido Materno</label>
+                          <input type="text" id="txtSurNameM" name="txtSurNameM" class="form-control" placeholder="Ingrese Apellido Materno">
+                          <label class="control-label">Apellido Materno</label>
                       </div>
                       <div class="col-md-4 text-center">
-                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese DNI">
-                        <label class="control-label">Documento de Identidad</label>
+                          <input type="text" id="txtDNIName" name="txtDNIName" class="form-control" placeholder="Ingrese DNI">
+                          <label class="control-label">Documento de Identidad</label>
                       </div>
                       <div class="col-md-4 text-center">
-                        <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" class="form-control" placeholder="Ingrese Email">
-                        <label class="control-label">Correo Electronico</label>
-                      </div>
-                      <div class="col-md-4 text-center">
-                        <div class="form-check form-check-inline">
-                          <input type="radio" name="sex" value="M" class="form-check-input" > Masculino
-                          <input type="radio" name="sex" value="F" class="form-check-input" > Feminino
-                        </div>
-                        <label class="control-label">Genero   User</label>
+                          <input type="text" id="txtEmail" name="txtEmail" class="form-control" placeholder="Ingrese Email">
+                          <label class="control-label">Correo Electrónico</label>
                       </div>
                   </div>
-              </div>
-              <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary">Guardar Cambios</button>
-              </div>
-          </div>
-          <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
+              </form>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveProfileBtn">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
   <!-- /.modal -->
-
 
   <!-- MODAL PARA CAMBIAR CONTRASEÑA -->
   <div id="modal-password" class="modal fade" role="dialog" aria-hidden="true">
@@ -166,5 +161,6 @@
   </div>
 
 @section('js')
-<script src="{{ asset('viewresources/user/update.js?=22072024') }}"></script>
+<script src="{{ asset('viewresources/user/update.js?=30072024') }}"></script>
+<script src="{{ asset('viewresources/user/updateUser.js?=30072024') }}"></script>
 @endsection
