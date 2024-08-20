@@ -10,12 +10,24 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function actionInsert(Request $request, SessionManager $sessionManager)
+    public function actionGetAll(Request $request, SessionManager $sessionManager)
     {
         $users = User::all();
         return view('admin.users.users', compact('users'));
     }
-    
+    /*public function actionGetAll()
+	{
+		$listUser = User::all();
+		return view('user/getall',
+		[
+			'listUser' => $listUser
+		]);
+	}*/
+    public function actionInsertUser(Request $request, SessionManager $sessionManager)
+    {
+        $users = User::all();
+        return view('admin.users.users', compact('users'));
+    }
     public function actionUpdatePassword(Request $request, SessionManager $sessionManager, $id)
     {
         if ($request->isMethod('post')) {
@@ -39,8 +51,6 @@ class UserController extends Controller
             if (!Hash::check($request->input('txtPassword'), $user->password)) {
                 $listMessage[] = 'La contraseña actual es incorrecta.';
                 return response()->json(['message' => implode("\n", $listMessage)], 422);
-                //$sessionManager->flash('typeMessage', 'error');
-                //return response()->json(['message' => 'La contraseña Actual es incorrecto.']);
             }
 
             $user->password = Hash::make($request->input('txtPassword1'));
@@ -112,12 +122,14 @@ class UserController extends Controller
             $user->email = $request->input('txtEmail');
             $user->save();
 
-            return response()->json(['success' => true, 'message' => 'Perfil actualizado correctamente.']);
+            return response()->json(['success' => true, 'message' => 'Perfil actualizado correctamente 😜.']);
 
         } catch (\Exception $e) {
             \Log::error('Error al actualizar el perfil del usuario: '.$e->getMessage());
             return response()->json(['success' => false, 'message' => 'Se produjo un error al actualizar el perfil.'], 500);
         }
     }
+
+    
 
 }

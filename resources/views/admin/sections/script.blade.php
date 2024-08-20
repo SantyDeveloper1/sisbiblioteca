@@ -33,6 +33,7 @@
 <script src="{{ asset('plugins/validations/formvalidation/bootstrap.validation.min.js') }}"></script>
 <script src="{{ asset('plugins/validations/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('plugins/validations/pnotify/pnotify.custom.min.js') }}"></script>
+
 <script>
   var _urlBase = '{{url('/')}}';
 

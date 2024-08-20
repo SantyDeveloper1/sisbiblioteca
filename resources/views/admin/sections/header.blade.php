@@ -162,5 +162,5 @@
 
 @section('js')
 <script src="{{ asset('viewresources/user/update.js?=30072024') }}"></script>
-<script src="{{ asset('viewresources/user/updateUser.js?=30072024') }}"></script>
+<script src="{{ asset('viewresources/user/updateUser.js?=2082024') }}"></script>
 @endsection

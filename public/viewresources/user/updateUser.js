@@ -6,7 +6,6 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
     $('#modal-perfil').on('show.bs.modal', function() {
         var userId = $('#id').val();  // Obtén el ID del usuario de algún lugar, por ejemplo, de un campo oculto
 
@@ -43,7 +42,6 @@ $(document).ready(function() {
             txtDNIName: $('#txtDNIName').val(),
             txtEmail: $('#txtEmail').val()
         };
-
         $.ajax({
             url: _urlBase + '/user/updateUser/' + userId,
             method: 'POST',
@@ -51,16 +49,20 @@ $(document).ready(function() {
             success: function(response) {
                 new PNotify({
                     title: 'Éxito',
-                    text: 'Perfil actualizado correctamente.',
+                    text: 'Perfil actualizado correctamente 😜.',
                     type: 'success'
                 });
+                // Oculta el modal
                 $('#modal-perfil').modal('hide');
+                // Recarga la página después de 5 segundos
+                setTimeout(function() {
+                    location.reload(); // Recarga la página
+                }, 5000);
             },
             error: function(xhr, status, error) {
                 if (xhr.responseJSON && xhr.responseJSON.errors) {
                     var errors = xhr.responseJSON.errors;
                     var errorMessages = errors.join('<br>');
-
                     new PNotify({
                         title: 'Error',
                         text: errorMessages,
@@ -77,37 +79,3 @@ $(document).ready(function() {
         });
     });
 });
-
-
-
-
-
-/*function updateUser(idUser) {
-    var formData = new FormData($('#form-user-update')[0]);
-
-    $.ajax({
-        url: _urlBase + '/user/updateUser/' + idUser,
-        method: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            new PNotify({
-                title: 'Éxito',
-                text: 'El perfil se actualizó correctamente.',
-                type: 'success'
-            });
-            window.location.reload();
-        },
-        error: function(xhr, status, error) {
-            new PNotify({
-                title: 'Error',
-                text: 'Error al actualizar al usuario.',
-                type: 'error'
-            });
-        }
-    });
-}*/
